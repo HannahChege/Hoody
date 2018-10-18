@@ -1,0 +1,6 @@
+.env
+virtual/
+.vscode
+hood/__pycache__/
+hoods/__pycache__/
+hoods/migrations/
