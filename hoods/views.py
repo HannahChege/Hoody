@@ -11,11 +11,17 @@ from django.template.loader import render_to_string
 from .tokens import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
+from django.contrib.auth.decorators import login_required
+from .models import NeighbourHood
 
 # Create your views here.
+@login_required(login_url='/accounts/login/')
 def hood(request):
-    return render(request,'index.html')
+    neighbourhoods = NeighbourHood.objects.all()
+    return render(request,'index.html',locals())
 
+    
+@login_required(login_url='/accounts/login/')
 def new_hood(request):
     current_user = request.user
     if request.method == 'POST':
