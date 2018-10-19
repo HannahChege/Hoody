@@ -21,11 +21,11 @@ def new_hood(request):
     if request.method == 'POST':
         form = NewHoodForm(request.POST, request.FILES)
         if form.is_valid():
-            image = form.save(commit=False)
-            image.profile = current_user.profile
-            image.user = current_user
+            hood = form.save(commit=False)
+            hood.profile = current_user.profile
+            hood.user = current_user
 
-            image.save()
+            hood.save()
         return redirect('hood')
 
     else:
