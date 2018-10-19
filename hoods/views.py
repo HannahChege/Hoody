@@ -3,7 +3,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import login, authenticate
 import datetime as dt
 from django.shortcuts import render
-from .forms import SignupForm
+from .forms import SignupForm,NewHoodForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -15,6 +15,23 @@ from django.core.mail import EmailMessage
 # Create your views here.
 def hood(request):
     return render(request,'index.html')
+
+def new_hood(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = NewHoodForm(request.POST, request.FILES)
+        if form.is_valid():
+            image = form.save(commit=False)
+            image.profile = current_user.profile
+            image.user = current_user
+
+            image.save()
+        return redirect('hood')
+
+    else:
+        form = NewHoodForm()
+    return render(request, 'new_hood.html', {"form": form})
+
 
 def search_results(request):
 
