@@ -1,0 +1,25 @@
+{%extends 'all-news/base.html'%} 
+{% block content %}
+<div class="container">
+
+  <div class="row">
+    {% if hoods%}
+      <h2>Found {{ hoods|length }} of searched term {{message}}</h2>
+    {% else %}
+      <h2> Found 0 hoods for the search term {{message}}</h2>
+    {% endif %}
+
+  </div>
+
+  <div class="row">
+
+  {% if hoods %}
+    {% for hood in hoods %}
+      <div class="col-sm-6 col-md-3">
+          <h1>{{hood.title}}</h1>
+      </div>
+    {% endfor %}
+  {% endif %}
+  </div>
+</div>
+{% endblock %}
