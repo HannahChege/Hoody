@@ -44,6 +44,15 @@ class Profile(models.Model):
 
 
 class NeighbourHood(models.Model):
+
+    	COUNTY_CHOICES = (
+('Adams','Nairobi '),
+('Kikuyu','Kiambu'),
+('Limuru','Kiambu'),
+('Wajir','Wajir County'),
+('West Pokot','West Pokot County'),
+   
+    )
     name = models.CharField(max_length =30)
     location= models.CharField(max_length =30)
     Occupants_Count= models.CharField(max_length = 30, blank=True)
