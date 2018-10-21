@@ -1,5 +1,9 @@
 {% block content %}
-  <h2>Sign up</h2>
+<div class="container">
+      <div class="row">
+          <div class="col-md-6 " id="signup">
+  <h4>HOODWATCH WEBSITE</h4>
+    <h2>Sign up</h2>
   <form method="post">
     {% csrf_token %}
       {% for field in form %}
@@ -16,4 +20,17 @@
       {% endfor %}
     <button type="submit">Sign up</button>
   </form>
+</div>
+</div>
 {% endblock %}
+<style>
+#signup{
+    background-color:; 
+    background-blend-mode: overlay;
+    background-attachment: fixed;
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-color: rgba(  0, 0, 0 ,0);
+    
+}
+</style>
