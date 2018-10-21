@@ -3,7 +3,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import login, authenticate
 import datetime as dt
 from django.shortcuts import render
-from .forms import SignupForm,NewHoodForm
+from .forms import SignupForm,NewHoodForm,ProfileForm,BusinessForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -12,7 +12,7 @@ from .tokens import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
 from django.contrib.auth.decorators import login_required
-from .models import NeighbourHood
+from .models import NeighbourHood,Business,Profile
 
 # Create your views here.
 @login_required(login_url='/accounts/login/')
@@ -93,3 +93,52 @@ def activate(request, uidb64, token):
         return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
     else:
         return HttpResponse('Activation link is invalid!')
+
+def profile(request, user_id):
+    """
+    Function that enables one to see their profile
+    """
+    title = "Profile"
+    profiles = User.objects.get(id=user_id)
+    user = User.objects.get(id=user_id)
+    return render(request, 'profile/profile.html',{'title':title,"profiles":profiles})
+
+  
+def new_profile(request):
+    current_user = request.user
+    profile=Profile.objects.get(user=request.user)
+    hood= Profile.objects.get(user=request.user)
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES,instance=request.user.profile)
+        if form.is_valid():
+            form.save()
+        return redirect('/')
+
+    else:
+        form = ProfileForm()
+    return render(request, "profile/edit_profile.html", {"form":form}) 
+       
+
+def business(request, user_id):
+    """
+    Function that enables one to see their profile
+    """
+    title = "Business"
+    businesses = User.objects.get(id=user_id)
+    user = User.objects.get(id=user_id)
+    return render(request, 'business/business.html',{'title':title,"businesses":businesses})
+
+def new_business(request):
+    current_user = request.user
+    businesses=Business.objects.get(user=request.user)
+    hood= Business.objects.get(user=request.user)
+    if request.method == 'POST':
+        form = BusinessForm(request.POST, request.FILES,instance=request.user.profile)
+        if form.is_valid():
+            form.save()
+        return redirect('/')
+
+    else:
+        form = BusinessForm()
+    return render(request, "business/edit_business.html", {"form":form}) 
+       
