@@ -115,3 +115,13 @@ class Post(models.Model):
        return self.description
    def get_absolute_url(self):
        return reverse('home')        
+
+class Join(models.Model):
+    """
+    Class that contains monitors which users have joined which neighbourhoods
+    """
+    user = models.OneToOneField(User)
+    hood = models.ForeignKey(NeighbourHood)
+
+    def __str__(self):
+        return self.user       
