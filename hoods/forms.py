@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import NeighbourHood,Business,Profile
+from .models import NeighbourHood,Business,Profile,Post
 
 
 class SignupForm(UserCreationForm):
@@ -32,7 +32,7 @@ class NewHoodForm(forms.ModelForm):
 class CreatePostForm(forms.ModelForm):
     class Meta:
         model = Post
-        exclude = ['user']
+        exclude = ['user','user_profile']
         widgets = {
             'likes': forms.CheckboxSelectMultiple(),
     }        
