@@ -145,3 +145,19 @@ def new_business(request):
         form = BusinessForm()
     return render(request, "business/edit_business.html", {"form":form}) 
        
+
+def create_post(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = CreatePostForm(request.POST, request.FILES)
+        if form.is_valid():
+            hood = form.save(commit=False)
+            hood.profile = current_user.profile
+            hood.user = current_user
+
+            hood.save()
+        return redirect('hood')
+
+    else:
+        form = CreatePostForm()
+    return render(request, 'create_post.html', {"form": form})       
