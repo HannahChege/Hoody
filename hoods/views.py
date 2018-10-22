@@ -3,7 +3,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import login, authenticate
 import datetime as dt
 from django.shortcuts import render
-from .forms import SignupForm,NewHoodForm,ProfileForm,BusinessForm
+from .forms import SignupForm,NewHoodForm,ProfileForm,BusinessForm,CreatePostForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -12,7 +12,7 @@ from .tokens import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
 from django.contrib.auth.decorators import login_required
-from .models import NeighbourHood,Business,Profile
+from .models import NeighbourHood,Business,Profile,Post
 
 # Create your views here.
 @login_required(login_url='/accounts/login/')
@@ -161,3 +161,5 @@ def create_post(request):
     else:
         form = CreatePostForm()
     return render(request, 'create_post.html', {"form": form})       
+
+
