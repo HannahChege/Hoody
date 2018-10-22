@@ -2,6 +2,7 @@ from django.http  import HttpResponse
 from django.shortcuts import render,redirect
 from django.contrib.auth import login, authenticate
 import datetime as dt
+from django.contrib import messages
 from django.shortcuts import render
 from .forms import SignupForm,NewHoodForm,ProfileForm,BusinessForm,CreatePostForm
 from django.contrib.sites.shortcuts import get_current_site
@@ -12,7 +13,7 @@ from .tokens import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
 from django.contrib.auth.decorators import login_required
-from .models import NeighbourHood,Business,Profile,Post
+from .models import NeighbourHood,Business,Profile,Post,Join
 
 # Create your views here.
 @login_required(login_url='/accounts/login/')
@@ -168,10 +169,20 @@ def join(request , hoodid):
     """
     This view edits neighbour class
     """
-    this_hood = Neighbour.objects.get(pk = hoodid)
+    this_neighbourhood =  NeighbourHood.objects.get(pk = hoodid)
     if Join.objects.filter(user = request.user).exists():
-        Join.objects.filter(user_id = request.user).update(hood_id = this_hood.id)
+        Join.objects.filter(user_id = request.user).update(hood_id = this_neighbourhood.id)
     else:
-        Join(user=request.user, hood_id = this_hood.id).save()
+        Join(user=request.user, hood_id = this_neighbourhood.id).save()
     messages.success(request, 'Success! You have succesfully joined this Neighbourhood ')
-    return redirect('index')
+    return redirect('hood')
+
+
+@login_required(login_url='/accounts/login/')
+def exithood(request, id):
+    """
+    Allows users to exit hoods
+    """
+    Join.objects.get(user_id = request.user).delete()
+    messages.error(request, "Neighbourhood exited")
+    return redirect('index')    
