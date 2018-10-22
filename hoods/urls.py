@@ -9,6 +9,7 @@ urlpatterns=[
     url(r'^signup/$', views.signup, name='signup'),
     url(r'^new/hood$', views.new_hood, name='new-hood'),
     url(r'^create/post$', views.create_post, name='create-post'),
+    url(r'join/$', views.join, name='join'),
     url(r'^profile/(\d+)', views.profile, name='profile'),
     url(r'^newprofile/', views.new_profile, name='new_profile'),
     url(r'^business/', views.business, name='business'),
