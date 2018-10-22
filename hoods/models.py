@@ -47,7 +47,10 @@ class NeighbourHood(models.Model):
     name = models.CharField(max_length =30)
     location= models.CharField(max_length =30)
     Occupants_Count= models.CharField(max_length = 30, blank=True)
+    police = models.IntegerField(null=True)
+    hospital = models.IntegerField(null=True)
     user = models.ForeignKey(User)
+
    
     def __str__(self):
         return self.user.username
@@ -98,3 +101,17 @@ class Business(models.Model):
     def get_by_id(cls,id):
         business = Business.objects.get(user = id)
         return business
+
+
+class Post(models.Model):
+   description =  models.CharField(max_length=70)
+   post_image = models.ImageField(upload_to='images/', null=True,blank=True)
+   time_created =  models.DateTimeField(auto_now=True, null =True)
+   location=models.ForeignKey(NeighbourHood)
+   user = models.ForeignKey(User, null=True)
+   user_profile = models.ForeignKey(Profile,null=True)
+
+   def __str__(self):
+       return self.description
+   def get_absolute_url(self):
+       return reverse('home')        
