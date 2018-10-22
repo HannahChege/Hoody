@@ -1,5 +1,4 @@
 from django.db import models
-import datetime as dt
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
@@ -47,8 +46,8 @@ class NeighbourHood(models.Model):
     name = models.CharField(max_length =30)
     location= models.CharField(max_length =30)
     Occupants_Count= models.CharField(max_length = 30, blank=True)
-    police = models.IntegerField(null=True)
-    hospital = models.IntegerField(null=True)
+    police = models.CharField(max_length =15)
+    hospital = models.CharField(max_length =15)
     user = models.ForeignKey(User)
 
    
@@ -79,6 +78,7 @@ class Business(models.Model):
     business_name = models.CharField(max_length =30)
     business_email = models.EmailField()
     user = models.ForeignKey(User)
+    hood = models.ForeignKey(NeighbourHood)
    
     def __str__(self):                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
         return self.user.username
@@ -99,14 +99,12 @@ class Business(models.Model):
         return business
     @classmethod 
     def get_by_id(cls,id):
-        business = Business.objects.get(user = id)
+        business = Business.objects.get(hood_id = id)
         return business
 
 
 class Post(models.Model):
    description =  models.CharField(max_length=70)
-   post_image = models.ImageField(upload_to='images/', null=True,blank=True)
-   time_created =  models.DateTimeField(auto_now=True, null =True)
    location=models.ForeignKey(NeighbourHood)
    user = models.ForeignKey(User, null=True)
    user_profile = models.ForeignKey(Profile,null=True)
@@ -114,7 +112,13 @@ class Post(models.Model):
    def __str__(self):
        return self.description
    def get_absolute_url(self):
-       return reverse('home')        
+       return reverse('home')   
+
+   @classmethod
+   def get_post_by_hood(cls, id):
+        post = Post.objects.filter(location_id=id).all()
+        return post    
+
 
 class Join(models.Model):
     """
@@ -124,4 +128,5 @@ class Join(models.Model):
     hood = models.ForeignKey(NeighbourHood)
 
     def __str__(self):
-        return self.user       
+        return self.user   
+  
