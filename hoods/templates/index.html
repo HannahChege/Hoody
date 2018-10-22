@@ -7,7 +7,7 @@
 <div class="container">
         <div class="row" style="padding-top: 20px">
             {%for neighbourhood in neighbourhoods %}
-            <div class="col-md-6" style="margin-bottom:10px;">
+            <div class="col-md-12" style="margin-bottom:10px;">
                 <div class="card">
                     
                     <div class="card">
@@ -16,8 +16,10 @@
                     <div class="card-body">
                         <p>LOCATION:{{neighbourhood.location}}</p>
                          <p>POPULATION:{{neighbourhood.Occupants_Count}}</p> 
-                        
-                        
+                 <div class="footer">
+                        <a href="create/post"   style=""; class="btn btn-primary">JOIN</a>
+                <a href="create/post"   style=""; class="btn btn-primary">CREATE POST</a>
+                         </div>
                     </div>
                 </div>
             </div>           
