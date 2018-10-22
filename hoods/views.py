@@ -1,7 +1,6 @@
 from django.http  import HttpResponse
 from django.shortcuts import render,redirect
 from django.contrib.auth import login, authenticate
-import datetime as dt
 from django.contrib import messages
 from django.shortcuts import render
 from .forms import SignupForm,NewHoodForm,ProfileForm,BusinessForm,CreatePostForm
@@ -18,10 +17,23 @@ from .models import NeighbourHood,Business,Profile,Post,Join
 # Create your views here.
 @login_required(login_url='/accounts/login/')
 def hood(request):
-    neighbourhoods = NeighbourHood.objects.all()
-    return render(request,'index.html',locals())
+    """
+    Renders the index page
+    """
+    if Join.objects.filter(user_id = request.user).exists():
+        neighbourhood = NeighbourHood.objects.get(pk = request.user.join.hood_id)
+        # occupants = Profile.get_user_by_hood(id= request.user.join.hood_id).all()
+        posts = Post.get_post_by_hood(id = request.user.join.hood_id)
+        # bussiness = Business.objects.get(id = request.user.join.hood_id)
+        return render(request,'hood.html', locals())
 
-    
+    else:
+        hoods = NeighbourHood.objects.all()
+        return render(request, 'index.html', locals())
+
+
+
+
 @login_required(login_url='/accounts/login/')
 def new_hood(request):
     current_user = request.user
@@ -185,4 +197,4 @@ def exithood(request, id):
     """
     Join.objects.get(user_id = request.user).delete()
     messages.error(request, "Neighbourhood exited")
-    return redirect('index')    
+    return redirect('hood')    
