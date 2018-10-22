@@ -163,3 +163,15 @@ def create_post(request):
     return render(request, 'create_post.html', {"form": form})       
 
 
+@login_required(login_url='/registration/login/')
+def join(request , hoodid):
+    """
+    This view edits neighbour class
+    """
+    this_hood = Neighbour.objects.get(pk = hoodid)
+    if Join.objects.filter(user = request.user).exists():
+        Join.objects.filter(user_id = request.user).update(hood_id = this_hood.id)
+    else:
+        Join(user=request.user, hood_id = this_hood.id).save()
+    messages.success(request, 'Success! You have succesfully joined this Neighbourhood ')
+    return redirect('index')
