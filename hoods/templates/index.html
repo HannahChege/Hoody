@@ -7,20 +7,17 @@
 <div class="container">
         <div class="row" style="padding-top: 20px">
             {%for neighbourhood in neighbourhoods %}
-            <div class="col-md-4">
+            <div class="col-md-6" style="margin-bottom:10px;">
                 <div class="card">
                     
                     <div class="card">
-                        <h4>{{neighbourhood.name}}</h4>
+                        <h4>NAME: {{neighbourhood.name}}</h4>
                     </div>
                     <div class="card-body">
-                        <p>{{neighbourhood.location}}</p>
-                        <p>
-                            
-                        </p>
+                        <p>LOCATION:{{neighbourhood.location}}</p>
+                         <p>POPULATION:{{neighbourhood.Occupants_Count}}</p> 
                         
                         
-                        <a href="" class="btn btn-sm btn-primary">Join</a>
                     </div>
                 </div>
             </div>           
