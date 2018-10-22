@@ -6,20 +6,21 @@
 {% block content %}
 <div class="container">
         <div class="row" style="padding-top: 20px">
-            {%for neighbourhood in neighbourhoods %}
+            {%for neighbourhood in hoods %}
             <div class="col-md-12" style="margin-bottom:10px;">
                 <div class="card">
                     
                     <div class="card">
-                        <h4>NAME: {{neighbourhood.name}}</h4>
+                        <p>LOCATION:{{neighbourhood.location}}</p>
                     </div>
                     <div class="card-body">
-                        <p>LOCATION:{{neighbourhood.location}}</p>
                          <p>POPULATION:{{neighbourhood.Occupants_Count}}</p> 
+                         <p>POLICE:{{neighbourhood.police}}</p>
+                         <p>HOSPITAL:{{neighbourhood.hospital}}</p>
+
                  <div class="footer">
-                        <a href="join/{{neighbourhood.id}}"   style=""; class="btn btn-primary">JOIN</a>
-                        <a href="join/{{neighbourhood.id}}"   style=""; class="btn btn-primary">EXIT GROUP</a>
-                <a href="create/post"   style=""; class="btn btn-primary">CREATE POST</a>
+                        <a href="/join/{{neighbourhood.id}}"   style=""; class="btn btn-primary">JOIN</a>
+                        <a href="/join/{{neighbourhood.id}}"   style=""; class="btn btn-primary">EXIT GROUP</a>
                          </div>
                     </div>
                 </div>
