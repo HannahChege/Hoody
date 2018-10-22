@@ -31,7 +31,7 @@ class NewHoodForm(forms.ModelForm):
 
 class CreatePostForm(forms.ModelForm):
     class Meta:
-        model = NeighbourHood
+        model = Post
         exclude = ['user']
         widgets = {
             'likes': forms.CheckboxSelectMultiple(),
