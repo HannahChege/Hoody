@@ -119,24 +119,27 @@ def new_profile(request):
     return render(request, "profile/edit_profile.html", {"form":form}) 
        
 
-def business(request, user_id):
+def business(request):
     """
     Function that enables one to see their profile
     """
     title = "Business"
-    businesses = User.objects.get(id=user_id)
-    user = User.objects.get(id=user_id)
-    return render(request, 'business/business.html',{'title':title,"businesses":businesses})
+    # businesses = User.objects.get(id=)
+    user = User.objects.get(id=request.user.id)
+    buss=Business.objects.all()
+    return render(request, 'business/business.html',{'title':title,"buss":buss})
 
 def new_business(request):
     current_user = request.user
-    businesses=Business.objects.get(user=request.user)
-    hood= Business.objects.get(user=request.user)
+    hood= Business.objects.all()
     if request.method == 'POST':
-        form = BusinessForm(request.POST, request.FILES,instance=request.user.profile)
+        form = BusinessForm(request.POST)
+        
         if form.is_valid():
+            post = form.save(commit=False)
+            post.user = current_user
             form.save()
-        return redirect('/')
+            return redirect('business')
 
     else:
         form = BusinessForm()
