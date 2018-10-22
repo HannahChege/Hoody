@@ -75,6 +75,7 @@ class NeighbourHood(models.Model):
 
 
 class Business(models.Model):
+    image = models.ImageField(upload_to = 'photos/', default='No image')
     business_name = models.CharField(max_length =30)
     business_email = models.EmailField()
     user = models.ForeignKey(User)
