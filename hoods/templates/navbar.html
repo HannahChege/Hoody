@@ -23,12 +23,15 @@
         {% if user.is_authenticated %}
         <ul>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button" aria-expanded="false">Account
+            <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button" aria-expanded="false">{{request.user.username}}
                       <span class="caret"></span>
                   </a>
             <ul class="dropdown-menu" role="menu">
               <li>
                 <a href="">Home</a>
+              </li>
+              <li>
+                <a href="profile">Edit Profile</a>
               </li>
               <li>
                 <a href="/accounts/password/change">Change Password</a>
@@ -51,6 +54,7 @@
       </div>
   </div>
   <div class="upload_project">
+      <a href="new/hood"style="margin-left:600px"; class="btn btn-primary">CONTACT INFORMATION</a>
     <a href="new/hood"   style="margin-left:1200px"; class="btn btn-primary">ADD HOOD</a>
 </div>
 <img src="/static/image/wood.jpg" width="1300px" height="300px">
