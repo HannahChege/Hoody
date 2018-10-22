@@ -1,0 +1,33 @@
+{% extends 'base.html'%}
+{% load bootstrap3 %}
+{% load bootstrap4 %}
+{% load static%}
+
+{% block content %}
+<div class="container">
+        <div class="row" style="padding-top: 20px">
+         
+            <div class="col-md-12" style="margin-bottom:10px;">
+                <div class="card">
+                    
+                    <div class="card">
+
+                        <p>WELCOME LOCATION:{{neighbourhood.location}}</p>
+                    </div>
+                    <div class="card-body">
+                         <p>POPULATION:{{neighbourhood.Occupants_Count}}</p> 
+                 <div class="footer">
+                        <a href="exithood/{{neighbourhood.id}}"   style=""; class="btn btn-primary">EXIT GROUP</a>
+                <a href="create/post"   style=""; class="btn btn-primary">CREATE POST</a>
+                         </div>
+                    </div>
+                </div>
+            </div>           
+          
+                    
+    </div>
+    </div>
+    {%endblock%}
+
+
+
