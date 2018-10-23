@@ -52,8 +52,7 @@ class NeighbourHood(models.Model):
 
    
     def __str__(self):
-        return self.user.username
-
+        return self.location
     def save_neigborhood(self):
         self.save()  
 

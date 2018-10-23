@@ -23,7 +23,8 @@ def hood(request):
     if Join.objects.filter(user_id = request.user).exists():
         neighbourhood = NeighbourHood.objects.get(pk = request.user.join.hood_id)
         # occupants = Profile.get_user_by_hood(id= request.user.join.hood_id).all()
-        posts = Post.get_post_by_hood(id = request.user.join.hood_id)
+        posts = Post.objects.filter(id = request.user.join.hood_id)
+        print(posts)
         # bussiness = Business.objects.get(id = request.user.join.hood_id)
         return render(request,'hood.html', locals())
 
@@ -140,7 +141,9 @@ def business(request):
     # businesses = User.objects.get(id=)
     user = User.objects.get(id=request.user.id)
     buss=Business.objects.all()
-    return render(request, 'business/business.html',{'title':title,"buss":buss})
+    print(buss)
+    print('pppppppppppppp')
+    return render(request, 'business/business.html',locals())
 
 def new_business(request):
     current_user = request.user
@@ -152,7 +155,7 @@ def new_business(request):
             post = form.save(commit=False)
             post.user = current_user
             form.save()
-            return redirect('business')
+        return redirect('business')
 
     else:
         form = BusinessForm()

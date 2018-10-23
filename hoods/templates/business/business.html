@@ -4,9 +4,12 @@
 <div class="well">
   <a class="view-more"></a>
   {% for comment in buss %}
-  <p style="color: aliceblue;">{{comment.name}}</p>kkkkkkkk
-  <p style="color:aliceblue;">{{comment.email}}</p>kkkkkkkk
-  <h1 style="color: white"></h1>
+  
+  <p style="color:black;">{{comment.business_name}}</p>
+  <p style="color:black;">{{comment.business_email}}</p>
+  <p style="color:black;">{{comment.hood_id}}</p>
+  <img src="{{comment.image.url}}" alt="" width="200" height="200">
+  <h1 style="color: black"></h1>
   </h1>
 
   {% endfor %}

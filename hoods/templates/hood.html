@@ -25,7 +25,22 @@
                             <br>
                  <div class="footer">
                         <a href="exithood/{{neighbourhood.id}}"   style=""; class="btn btn-primary">EXIT GROUP</a>
-                <a href="newbusiness/"style=""; class="btn btn-primary">CREATE POST</a>
+
+                        <div class="card">
+                        <a href="create/post"style=""; class="btn btn-primary">CREATE POST</a>
+                                {%for post in posts%}
+                                <p class="desc">DESCRIPTION:&nbsp;&nbsp;&nbsp;{{post.description}}  </p>
+                                <p class="desc">LOCATION :&nbsp;&nbsp;&nbsp;{{post.location}} </p>
+                                {% endfor %}  
+                                <div class="card">
+                                Comment 
+                        </div>
+                     <div class="footer">
+                
+                {%for post in posts%}
+                 {{post.description}} 
+                {{post.location}}
+                 {% endfor %}
                          </div>
                     </div>
                 
@@ -47,7 +62,7 @@
     </div>       
     </div>
     </div>
-    {%endblock%}
+    {% endblock %}
 
 
 

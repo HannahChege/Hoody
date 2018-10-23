@@ -32,7 +32,8 @@ class NewHoodForm(forms.ModelForm):
 class CreatePostForm(forms.ModelForm):
     class Meta:
         model = Post
-        exclude = ['user','user_profile']
+        # exclude = ['user','user_profile']
+        fields=['location','description']
         widgets = {
             'likes': forms.CheckboxSelectMultiple(),
     }        
